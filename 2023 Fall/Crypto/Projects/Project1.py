@@ -47,27 +47,27 @@ def cryptoisfun():
         c.append((((5*val) + 9) % n))
     print("Problem 1\n\n")
     print("1c.")
-    print(f"Plaintext: {p_numerical}")
-    print(f'Plaintext Numerical: {p1}')
+    print(f"Plaintext: {p}")
+    print(f'Plaintext Numerical: {p_numerical}')
     print(f"Ciphertext Numerical: {c}")
     print(f"Ciphertext Readable: {readable(c)}\n")
 
-
+'''----------------Code for Part 1: question 2--------------------'''
 
 def affine():
     ciphertext = "QJKESREOGHGXXREOXEO"
 
     m = 26
-    p2 = 19
-    c2 = 7
-
-    p1 = 14
-    c1 = 4
+    p1 = 14 #Plaintext value
+    c1 = 4  #ciperhtext value
+    p2 = 19 #Plaintext value #2
+    c2 = 7 #ciperhtext value #2
 
     nums = find_a_b(p1, c1, p2, c2,m)
     plaintext1 = []
     ciphertextNumerical = []
     for letter in ciphertext:
+        #find number correlating to the number
         i = find_index(letter)
         ciphertextNumerical.append(i)
         d = decrypt(i,nums)
@@ -81,10 +81,11 @@ def affine():
     print(f"Plaintext Numerical: {plaintext1}")
     print(f"Plaintext: {readable(plaintext1)}")
 
-def find_relatives():
+def find_relatives(n):
+    #Find all the relative numbers for n
     ans = []
-    for i in range(26):
-        if math.gcd(i,26) == 1:
+    for i in range(n):
+        if math.gcd(i,n) == 1:
             ans.append(i)
     return ans
 
@@ -95,14 +96,16 @@ def find_index(letter):
             return i
         
 def find_a_b(p1, c1, p2, c2,m):
-    nums = find_relatives()
-    for i in nums: #a
-        for j in range(m): #b
-            ans = ((i*p1) + j) % m
+    nums = find_relatives(m)
+
+    #iterate through the relative numbers using the affine equation to find a and b
+    for a in nums: #a
+        for b in range(m): #b
+            ans = ((a*p1) + b) % m
             if(ans==c1):
-                ans2 = ((i*p2) + j) % m
+                ans2 = ((a*p2) + b) % m
                 if(ans2==c2):
-                    return [i,j]
+                    return [a,b]
                 
                 
 def decrypt(num,ans):
@@ -116,7 +119,7 @@ def encrypt(num, ans):
     return e
 
 cryptoisfun()
-#affine()
+affine()
 
 
 '''
