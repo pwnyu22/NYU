@@ -1,20 +1,21 @@
 import math
 import matplotlib.pyplot as plt
 # Universal stuff
+
+alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
+            "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ]
+
 def readable (temp):
     readable = []
     for t in temp:
         readable.append(alphabet[t])
     return (f'C Letters: {"".join(readable)}')
 
-alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
-            "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ]
+
 '''
 Part 1:
 
-a. Define affine cipher in more detial
 
-b. What is the size of the keyspace for a fixed integer n?
 
 c. Encrypt "CRYPTOISFUN" where:
     n=26
@@ -28,17 +29,25 @@ e. Ans: c=ap + b mod 53
 
 
 def cryptoisfun():
+    ''' 
+        Code for part 1: 
+        Encrypt "CRYPTOISFUN" where:
+        n=26
+        function: c=5p + 9 mod 26
+    '''
+
     n = 26
     p = "CRYPTOISFUN"
+    p_numerical = [] #numerical value of CRYPTOISFUN
     c = []
-    p1 = []
+    
     for letter in p:
         val = find_index(letter)
-        p1.append(val)
+        p_numerical.append(val)
         c.append((((5*val) + 9) % n))
     print("Problem 1\n\n")
     print("1c.")
-    print(f"Plaintext: {p}")
+    print(f"Plaintext: {p_numerical}")
     print(f'Plaintext Numerical: {p1}')
     print(f"Ciphertext Numerical: {c}")
     print(f"Ciphertext Readable: {readable(c)}\n")
@@ -106,8 +115,10 @@ def encrypt(num, ans):
     e = ((ans[0]*num) + ans[1] ) % 26
     return e
 
-#cryptoisfun()
+cryptoisfun()
 #affine()
+
+
 '''
 
 for t in temp:
